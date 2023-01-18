@@ -7,4 +7,8 @@ app.get("/", (req, res)=>{
     res.send("Hello")
 });
 
+app.post("/api/user/register", (req,res)=>{
+    
+})
+
 app.listen(port, () => console.log("Server listening port: "+port));
