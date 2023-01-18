@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const port = 3000;
 app.get("/", (req, res) => {
-    res.send("Hello");
+    res.send("Hello ts");
 });
 app.post("/api/user/register", (req, res) => {
     res.send("nothing");
