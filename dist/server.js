@@ -23,14 +23,17 @@ app.get("/", (req, res) => {
 });
 app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let { id, username, password } = req.body;
-    console.log("register");
-    let userinfo = { id, username, password };
+    //console.log("register")
+    //let userinfo: User =  {id,username,password}
     try {
         const hashedPassword = yield bcrypt_1.default.hash(req.body.password, 10);
-        users.push({ id: Date.now().toString(),
-            username: "user",
+        const userinfo = { id: req.body.id,
+            username: req.body.username,
+            password: hashedPassword };
+        /*         users.push({id: Date.now().toString(),
+            username: req.body.username,
             password: hashedPassword
-        });
+        }) */
         console.log(userinfo);
         res.send(users);
     }

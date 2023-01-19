@@ -25,15 +25,18 @@ app.get("/", (req: Request, res: Response)=>{
 
 app.post("/api/user/register", async (req: Request, res: Response)=>{
     let {id,username,password} = req.body
-    console.log("register")
-    let userinfo: User =  {id,username,password}
+    //console.log("register")
+    //let userinfo: User =  {id,username,password}
 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password,10)
-        users.push({id: Date.now().toString(),
-            username: "user",
+        const userinfo: User = {id: req.body.id,
+            username: req.body.username,
+            password: hashedPassword}
+        /*         users.push({id: Date.now().toString(), 
+            username: req.body.username,
             password: hashedPassword
-        })
+        }) */
 
         console.log(userinfo)
         res.send(users)
