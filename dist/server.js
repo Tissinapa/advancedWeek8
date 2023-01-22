@@ -26,7 +26,7 @@ app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, f
     //console.log("register")
     //let userinfo: User =  {username: "testi",password:"salisssss"}
     let hUsers = { id, username, password };
-    let userinfo = { username: "user", password: "password" };
+    let userinfo = { username: req.body.username, password: req.body.password };
     //users.push({id: req.body.id, username: "testi", password: "testisalis"})
     const findUser = userinfo.username;
     if (users.length === 0) {
@@ -44,7 +44,7 @@ app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, f
         res.send(userinfo);
     }
     else if (users.length > 0) {
-        if (findUser === "user") {
+        if (findUser === req.body.username) {
             console.log("löyty");
             res.sendStatus(400);
         }

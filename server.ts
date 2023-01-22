@@ -32,7 +32,7 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
     //console.log("register")
     //let userinfo: User =  {username: "testi",password:"salisssss"}
     let hUsers: HashedUsers =  {id, username, password}
-    let userinfo: User =  {username: "user",password:"password"}
+    let userinfo: User =  {username: req.body.username,password:req.body.password}
     //users.push({id: req.body.id, username: "testi", password: "testisalis"})
     const findUser: string = userinfo.username
 
@@ -50,7 +50,7 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
         console.log(userinfo)      
         res.send(userinfo)
     }else if(users.length>0){
-        if (findUser==="user"){
+        if (findUser===req.body.username){
             console.log("löyty")
             res.sendStatus(400)
         }else{
@@ -63,9 +63,6 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
             res.send(userinfo)
         }
     }
-
-
-
 
 })
 app.get("/api/user/list", (req: Request, res: Response)=>{
