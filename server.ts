@@ -32,33 +32,41 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
     //console.log("register")
     //let userinfo: User =  {username: "testi",password:"salisssss"}
     let hUsers: HashedUsers =  {id, username, password}
-    //users.push()
-    //console.log(userinfo.username)
-    //users.push(userinfo)
-    //users.push({username: "testi", password:"salis"})
-    //users.push({username: "testi1", password:"salis23"})
+    let userinfo: User =  {username: "user",password:"password"}
     //users.push({id: req.body.id, username: "testi", password: "testisalis"})
- 
-    try {
-        let userinfo: User =  {username: "user",password:"password"}
-    
+    const findUser: string = userinfo.username
+
+    if(users.length===0){
         const hashedPassword = await bcrypt.hash(userinfo.password,10)
         //const userinfo: User = {id: req.body.id,
         //    username: req.body.username,
         //    password: hashedPassword}
         //users.push(userinfo)
-        //console.log(req.body.username)
-        
+        //console.log(req.body.username)   
         users.push({id: Date.now().toString(), 
             username: userinfo.username,
             password: hashedPassword
         })
-        
         console.log(userinfo)      
         res.send(userinfo)
-    } catch {
-        
+    }else if(users.length>0){
+        if (findUser==="user"){
+            console.log("löyty")
+            res.sendStatus(400)
+        }else{
+            const hashedPassword = await bcrypt.hash(userinfo.password,10)
+            users.push({id: Date.now().toString(), 
+                username: userinfo.username,
+                password: hashedPassword
+            })
+            console.log(userinfo)      
+            res.send(userinfo)
+        }
     }
+
+
+
+
 })
 app.get("/api/user/list", (req: Request, res: Response)=>{
     res.send(users)
