@@ -31,8 +31,8 @@ app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, f
     const findUser = userinfo.username;
     if (users.length == 0) {
         const hashedPassword = yield bcrypt_1.default.hash(userinfo.password, 10);
-        res.send(userinfo);
         userinfo.password = hashedPassword;
+        res.send(userinfo);
         users.push({ id: Date.now().toString(),
             username: userinfo.username,
             password: hashedPassword

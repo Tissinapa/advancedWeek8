@@ -38,8 +38,9 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
 
     if(users.length==0){
         const hashedPassword = await bcrypt.hash(userinfo.password,10)
-        res.send(userinfo)
+        
         userinfo.password=hashedPassword
+        res.send(userinfo)
         users.push({id: Date.now().toString(), 
             username: userinfo.username,
             password: hashedPassword
