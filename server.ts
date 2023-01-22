@@ -32,25 +32,21 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
     //console.log("register")
     //let userinfo: User =  {username: "testi",password:"salisssss"}
     let hUsers: HashedUsers =  {id, username, password}
-    let userinfo: User =  {username: req.body.username,password:req.body.password}
+    let userinfo: User =  {username: "user",password:"password"}
     //users.push({id: req.body.id, username: "testi", password: "testisalis"})
     const findUser: string = userinfo.username
 
-    if(users.length===0){
+    if(users.length==0){
         const hashedPassword = await bcrypt.hash(userinfo.password,10)
-        //const userinfo: User = {id: req.body.id,
-        //    username: req.body.username,
-        //    password: hashedPassword}
-        //users.push(userinfo)
-        //console.log(req.body.username)   
+
         users.push({id: Date.now().toString(), 
             username: userinfo.username,
             password: hashedPassword
         })
         console.log(userinfo)      
         res.send(userinfo)
-    }else if(users.length>0){
-        if (findUser===req.body.username){
+    }else if(users.length>=1){
+        if (findUser===userinfo.username){
             console.log("löyty")
             res.sendStatus(400)
         }else{

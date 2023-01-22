@@ -26,16 +26,11 @@ app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, f
     //console.log("register")
     //let userinfo: User =  {username: "testi",password:"salisssss"}
     let hUsers = { id, username, password };
-    let userinfo = { username: req.body.username, password: req.body.password };
+    let userinfo = { username: "user", password: "password" };
     //users.push({id: req.body.id, username: "testi", password: "testisalis"})
     const findUser = userinfo.username;
-    if (users.length === 0) {
+    if (users.length == 0) {
         const hashedPassword = yield bcrypt_1.default.hash(userinfo.password, 10);
-        //const userinfo: User = {id: req.body.id,
-        //    username: req.body.username,
-        //    password: hashedPassword}
-        //users.push(userinfo)
-        //console.log(req.body.username)   
         users.push({ id: Date.now().toString(),
             username: userinfo.username,
             password: hashedPassword
@@ -43,8 +38,8 @@ app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, f
         console.log(userinfo);
         res.send(userinfo);
     }
-    else if (users.length > 0) {
-        if (findUser === req.body.username) {
+    else if (users.length >= 1) {
+        if (findUser === userinfo.username) {
             console.log("löyty");
             res.sendStatus(400);
         }
