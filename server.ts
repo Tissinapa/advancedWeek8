@@ -38,14 +38,16 @@ app.post("/api/user/register", async (req: Request, res: Response)=>{
 
     if(users.length==0){
         const hashedPassword = await bcrypt.hash(userinfo.password,10)
-        //userinfo.password=hashedPassword
+        res.send(userinfo)
+        userinfo.password=hashedPassword
         users.push({id: Date.now().toString(), 
             username: userinfo.username,
             password: hashedPassword
         })
-        //console.log(userinfo)
-        //console.log(userinfo.password)      
-        res.send(users)
+        console.log(userinfo)
+        //console.log(userinfo.password)
+
+        
     }else if(users.length>=1){
         if (findUser===userinfo.username){
             console.log("löyty")
