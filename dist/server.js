@@ -24,20 +24,33 @@ app.get("/", (req, res) => {
 app.post("/api/user/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let { id, username, password } = req.body;
     //console.log("register")
-    //let userinfo: User =  {id,username,password}
+    //let userinfo: User =  {username: "testi",password:"salisssss"}
+    let hUsers = { id, username, password };
+    //users.push()
+    //console.log(userinfo.username)
+    //users.push(userinfo)
+    //users.push({username: "testi", password:"salis"})
+    //users.push({username: "testi1", password:"salis23"})
+    //users.push({id: req.body.id, username: "testi", password: "testisalis"})
     try {
-        const hashedPassword = yield bcrypt_1.default.hash(req.body.password, 10);
-        const userinfo = { id: req.body.id,
-            username: req.body.username,
-            password: hashedPassword };
-        /*         users.push({id: Date.now().toString(),
-            username: req.body.username,
+        let userinfo = { username: "user", password: "password" };
+        const hashedPassword = yield bcrypt_1.default.hash(userinfo.password, 10);
+        //const userinfo: User = {id: req.body.id,
+        //    username: req.body.username,
+        //    password: hashedPassword}
+        //users.push(userinfo)
+        //console.log(req.body.username)
+        users.push({ id: Date.now().toString(),
+            username: userinfo.username,
             password: hashedPassword
-        }) */
+        });
         console.log(userinfo);
-        res.send(users);
+        res.send(userinfo);
     }
     catch (_a) {
     }
 }));
+app.get("/api/user/list", (req, res) => {
+    res.send(users);
+});
 app.listen(port, () => console.log("Server listening port: " + port));
